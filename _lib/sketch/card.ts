@@ -29,4 +29,3 @@ export function draw(context: P5I) {
 export function windowResized({ windowWidth, windowHeight, resizeCanvas }: P5I) {
   resizeCanvas(windowWidth, windowHeight);
 }
-
