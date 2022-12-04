@@ -15,6 +15,11 @@ export class Figure extends Drawable{
     this.name = name;
   }
   animate({ width }: P5I): void {
-    this.x = (this.x + 10) % width;
+    this.x = (this.x + 100) % width;
+  }
+
+  sprite({ circle }: P5I): void {
+    circle(0, 10, 20);
+    circle(0, 0, 20);
   }
 }

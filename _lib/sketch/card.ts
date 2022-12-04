@@ -1,11 +1,9 @@
-import { p5i, P5I } from 'p5i';
 import { Drawable } from 'lib/drawable.ts';
 import { Figure } from 'lib/figure.ts';
 
 const figures: Drawable[] = [];
-const { mount } = p5i();
 
-function setup({ windowWidth, windowHeight, createCanvas, stroke, frameRate, random }: P5I) {
+export function setup({ windowWidth, windowHeight, createCanvas, stroke, frameRate, random }: P5I) {
   const WIDTH = windowWidth;
   const HEIGHT = windowHeight;
   createCanvas(WIDTH, HEIGHT);
@@ -17,17 +15,18 @@ function setup({ windowWidth, windowHeight, createCanvas, stroke, frameRate, ran
   figures.push(new Figure({ name: 'Bea', x: WIDTH * 4 / 5, y: random(0.5, 1.5) * HEIGHT / 4, }));
 }
 
-function draw(context: P5I) {
-  const { height, push, pop, scale, translate, background } = context;
+export function draw(context: P5I) {
+  const { height, push, pop, scale, translate, background, clear } = context;
   push();
   scale(1, -1);
   translate(0, -height);
-  background(100, 100);
+  clear();
 
   figures.forEach(f => f.draw(context));
   pop();
 }
 
-addEventListener('DOMContentLoaded', () => {
-  mount(document.getElementById('cardCanvas'), { setup, draw });
-});
+export function windowResized({ windowWidth, windowHeight, resizeCanvas }: P5I) {
+  resizeCanvas(windowWidth, windowHeight);
+}
+

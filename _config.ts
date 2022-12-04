@@ -4,6 +4,8 @@ import esbuild from "lume/plugins/esbuild.ts";
 
 const site = lume();
 
+site.loadAssets(['.css']);
+
 site.use(base_path());
 site.use(esbuild({
   options: {
