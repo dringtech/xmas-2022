@@ -1,8 +1,8 @@
-import { Drawable } from 'lib/drawable.ts';
-import { Figure } from 'lib/figure.ts';
-import { P5I } from '../../../../deno/.cache/deno/npm/registry.npmjs.org/p5i/0.4.2/dist/p5i.d.ts';
-import { Delia } from '../parts/delia.ts';
-import { Mouse } from '../parts/mouse.ts';
+import { P5I } from 'p5i';
+import { Figure } from 'lib/parts/figure.ts';
+import { Delia } from 'lib/parts/delia.ts';
+import { Mouse } from 'lib/parts/mouse.ts';
+import { Drawable } from 'lib/util/drawable.ts';
 
 const figures: Drawable[] = [];
 let mouse: Mouse;

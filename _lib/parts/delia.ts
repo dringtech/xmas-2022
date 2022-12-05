@@ -1,6 +1,6 @@
 import { P5I } from 'p5i';
-import { Drawable } from "lib/drawable.ts";
-import { calculateVectorToTarget } from '../utils/vector.ts';
+import { Drawable } from "lib/utils/drawable.ts";
+import { calculateVectorToTarget } from 'lib/utils/vector.ts';
 
 const DEBUG = false;
 

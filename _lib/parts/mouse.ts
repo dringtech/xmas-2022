@@ -1,5 +1,5 @@
 import { P5I } from 'p5i';
-import { Drawable } from '../drawable.ts';
+import { Drawable } from 'lib/utils/drawable.ts';
 const DEBUG = false;
 
 export class Mouse extends Drawable {

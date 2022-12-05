@@ -1,4 +1,4 @@
-import { Drawable } from 'lib/drawable.ts';
+import { Drawable } from 'lib/utils/drawable.ts';
 import { bearingToTarget, calculateVectorToTarget, rangeToTarget } from 'lib/utils/vector.ts';
 import { P5I } from 'p5i';
 
