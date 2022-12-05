@@ -3,6 +3,10 @@ import { Drawable } from '../drawable.ts';
 const DEBUG = false;
 
 export class Mouse extends Drawable {
+  constructor(x: number, y: number) {
+    super(x, y);
+    this.ghost = true;
+  }
   sprite({ push, noFill, stroke, strokeWeight, circle, line, pop }: P5I): void {
     if (!DEBUG) return;
     push();

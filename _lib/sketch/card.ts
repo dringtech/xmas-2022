@@ -31,7 +31,9 @@ export function draw(context: P5I) {
   scale(1, -1);
   translate(0, -height);
 
-  figures.forEach(f => f.draw(context));
+  // Sort figures by y
+  figures.forEach((f: Drawable) => f.animate(context, figures));
+  figures.forEach((f: Drawable) => f.draw(context));
   pop();
 }
 
