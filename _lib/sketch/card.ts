@@ -40,7 +40,21 @@ export function draw(context: P5I) {
 export function windowResized({ windowWidth, windowHeight, resizeCanvas }: P5I) {
   resizeCanvas(windowWidth, windowHeight);
 }
-export function mouseMoved({ mouseX, mouseY, height }: P5I) {
+
+export function mousePressed(context: P5I) {
+  setMousePosition(context);
+  return false;
+}
+export function mouseMoved(context: P5I) {
+  setMousePosition(context);
+  return false;
+}
+export function mouseDragged(context: P5I) {
+  setMousePosition(context);
+  return false;
+}
+
+function setMousePosition({ mouseX, mouseY, height }: P5I) {
   mouse.x = mouseX;
   mouse.y = height - mouseY;
 }
