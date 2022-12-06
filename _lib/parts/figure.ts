@@ -1,4 +1,3 @@
-import { image } from "d3";
 import { Drawable } from "lib/utils/drawable.ts";
 import {
   bearingToTarget,
@@ -12,7 +11,7 @@ const jitterbug = 100;
 
 const calculateRepulsion = (me: Drawable, allFiigures: Drawable[]) => {
   const them = allFiigures.filter((x) => x !== me && x.ghost !== true);
-  let vector = [0, 0];
+  const vector = [0, 0];
   for (const other of them) {
     const range = rangeToTarget(me, other);
     if (range > smallestGap) continue;
@@ -50,7 +49,7 @@ export class Figure extends Drawable implements FigureConfig {
     this.head = head;
     this.noiseSeed = random(1000);
   }
-  animate({ width, noise }: P5I, figures: Drawable[]): void {
+  animate({ noise }: P5I, figures: Drawable[]): void {
     if (!this.running) return;
     this.noiseSeed += jitterbug;
     const speed = 5;
@@ -58,7 +57,7 @@ export class Figure extends Drawable implements FigureConfig {
     const jitter = [noise(this.noiseSeed), noise(this.noiseSeed + 10000)].map(
       (v) => (v - 0.5) * jitterScale,
     );
-    let vector = calculateVectorToTarget(this, this.target, speed);
+    const vector = calculateVectorToTarget(this, this.target, speed);
     // if (rangeToTarget(this, this.target) < 50) vector = [0, 0];
     const repulsion = calculateRepulsion(this, figures);
     this.x = this.x + vector[0] + repulsion[0] + jitter[0];

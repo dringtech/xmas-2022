@@ -1,4 +1,4 @@
-import { P5I } from 'p5i';
+import { P5I } from "p5i";
 
 export abstract class Drawable {
   initPos: [number, number];
@@ -13,8 +13,10 @@ export abstract class Drawable {
     this.ghost = false;
   }
 
-  sprite({ circle }: P5I): void { circle(0, 0, 20) }
-  animate(_context: P5I, _figures: Drawable[]): void { }
+  sprite({ circle }: P5I): void {
+    circle(0, 0, 20);
+  }
+  animate(_context: P5I, _figures: Drawable[]): void {}
   draw(context: P5I): void {
     context.push();
     context.translate(this.x, this.y);

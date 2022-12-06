@@ -5,6 +5,12 @@
     "build": "deno task lume",
     "serve": "deno task lume -s"
   },
+  "compilerOptions": {
+    "lib": [
+      "deno.window",
+      "dom"
+    ]
+  },
   "lint": {
     "files": {
       "exclude": [

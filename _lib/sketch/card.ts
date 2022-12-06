@@ -1,19 +1,23 @@
-import { P5I, Image } from 'p5i';
-import { Figure } from 'lib/parts/figure.ts';
-import { Delia } from 'lib/parts/delia.ts';
-import { Mouse } from 'lib/parts/mouse.ts';
-import { Drawable } from 'lib/util/drawable.ts';
+import { Image, P5I } from "p5i";
+import { Figure } from "lib/parts/figure.ts";
+import { Delia } from "lib/parts/delia.ts";
+import { Mouse } from "lib/parts/mouse.ts";
+import { Drawable } from "lib/util/drawable.ts";
 
 const figures: Drawable[] = [];
 let mouse: Mouse;
 let assets: Record<string, Image>;
 
 export function preload({ loadImage }: P5I) {
-  assets = Object.entries(assetsUrls).reduce((a, [k, v]) => ({ ...a, [k]: loadImage(v) }), {});
+  assets = Object.entries(assetsUrls).reduce(
+    (a, [k, v]) => ({ ...a, [k]: loadImage(v) }),
+    {},
+  );
 }
 
 export function setup(context: P5I) {
-  const { windowWidth, windowHeight, createCanvas, stroke, frameRate, random } = context;
+  const { windowWidth, windowHeight, createCanvas, stroke, frameRate, random } =
+    context;
   const WIDTH = windowWidth;
   const HEIGHT = windowHeight;
   createCanvas(WIDTH, HEIGHT);
@@ -23,14 +27,46 @@ export function setup(context: P5I) {
   figures.push(mouse);
   const delia = new Delia(WIDTH / 2, HEIGHT / 2, mouse);
   figures.push(delia);
-  figures.push(new Figure({ name: 'Giles', x: WIDTH * 1 / 5, y: random(0.5, 1.5) * HEIGHT / 4, target: delia, head: assets.giles }, context));
-  figures.push(new Figure({ name: 'Rebecca', x: WIDTH * 2 / 5, y: random(0.5, 1.5) * HEIGHT / 4, target: delia, head: assets.rebecca }, context));
-  figures.push(new Figure({ name: 'Martha', x: WIDTH * 3 / 5, y: random(0.5, 1.5) * HEIGHT / 4, target: delia, head: assets.martha }, context));
-  figures.push(new Figure({ name: 'Bea', x: WIDTH * 4 / 5, y: random(0.5, 1.5) * HEIGHT / 4, target: delia, head: assets.bea }, context));
+  figures.push(
+    new Figure({
+      name: "Giles",
+      x: WIDTH * 1 / 5,
+      y: random(0.5, 1.5) * HEIGHT / 4,
+      target: delia,
+      head: assets.giles,
+    }, context),
+  );
+  figures.push(
+    new Figure({
+      name: "Rebecca",
+      x: WIDTH * 2 / 5,
+      y: random(0.5, 1.5) * HEIGHT / 4,
+      target: delia,
+      head: assets.rebecca,
+    }, context),
+  );
+  figures.push(
+    new Figure({
+      name: "Martha",
+      x: WIDTH * 3 / 5,
+      y: random(0.5, 1.5) * HEIGHT / 4,
+      target: delia,
+      head: assets.martha,
+    }, context),
+  );
+  figures.push(
+    new Figure({
+      name: "Bea",
+      x: WIDTH * 4 / 5,
+      y: random(0.5, 1.5) * HEIGHT / 4,
+      target: delia,
+      head: assets.bea,
+    }, context),
+  );
 }
 
 export function draw(context: P5I) {
-  const { height, push, pop, scale, translate, background, clear } = context;
+  const { height, push, pop, scale, translate, clear } = context;
   clear();
   push();
   scale(1, -1);
@@ -42,7 +78,9 @@ export function draw(context: P5I) {
   pop();
 }
 
-export function windowResized({ windowWidth, windowHeight, resizeCanvas }: P5I) {
+export function windowResized(
+  { windowWidth, windowHeight, resizeCanvas }: P5I,
+) {
   resizeCanvas(windowWidth, windowHeight);
 }
 
