@@ -5,3 +5,8 @@ scripts:
   lint:
     desc: Lints code
     cmd: deno lint --config deno.json
+  pre-commit:
+    cmd:
+      - vr fmt
+      - vr lint
+    gitHook: pre-commit
