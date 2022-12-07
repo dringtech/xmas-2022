@@ -8,6 +8,8 @@ const figures: Drawable[] = [];
 let mouse: Mouse;
 let assets: Record<string, Image>;
 
+const parent = document.getElementById("cardCanvas");
+
 export function preload({ loadImage }: P5I) {
   assets = Object.entries(assetsUrls).reduce(
     (a, [k, v]) => ({ ...a, [k]: loadImage(v) }),
@@ -15,11 +17,15 @@ export function preload({ loadImage }: P5I) {
   );
 }
 
+function getBoundingBox() {
+  const bbox = parent.getBoundingClientRect();
+  console.log(bbox);
+  return bbox;
+}
+
 export function setup(context: P5I) {
-  const { windowWidth, windowHeight, createCanvas, stroke, frameRate, random } =
-    context;
-  const WIDTH = windowWidth;
-  const HEIGHT = windowHeight;
+  const { createCanvas, stroke, frameRate, random } = context;
+  const { width: WIDTH, height: HEIGHT } = getBoundingBox();
   createCanvas(WIDTH, HEIGHT);
   stroke(255);
   frameRate(30);
@@ -84,9 +90,10 @@ export function draw(context: P5I) {
 }
 
 export function windowResized(
-  { windowWidth, windowHeight, resizeCanvas }: P5I,
+  { resizeCanvas }: P5I,
 ) {
-  resizeCanvas(windowWidth, windowHeight);
+  const { width, height } = getBoundingBox();
+  resizeCanvas(width, height);
 }
 
 export function mousePressed(context: P5I) {

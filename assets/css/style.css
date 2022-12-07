@@ -8,6 +8,10 @@ body {
   font-family: 'Gloria Hallelujah', cursive;
 }
 
+div {
+  box-sizing: content-box;
+}
+
 main {
   display: flex;
   flex-direction: column;
@@ -15,7 +19,12 @@ main {
   color: white;
 }
 h1 {
-  font-size: 4vw;
+  font-size: min(6vw, 4rem);
+  text-align: center;
+  padding: 0 2rem;
+}
+canvas {
+  border 1px solid white;
 }
 
 .sketch {
