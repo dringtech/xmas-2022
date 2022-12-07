@@ -78,6 +78,7 @@ export function draw(context: P5I) {
 
   // Sort figures by y
   figures.forEach((f: Drawable) => f.animate(context, figures));
+  figures.sort((a: Drawable, b: Drawable) => (b.y - a.y));
   figures.forEach((f: Drawable) => f.draw(context));
   pop();
 }
