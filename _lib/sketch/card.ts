@@ -29,9 +29,9 @@ export function setup(context: P5I) {
   createCanvas(WIDTH, HEIGHT);
   stroke(255);
   frameRate(30);
-  mouse = new Mouse(WIDTH / 2, HEIGHT / 2);
+  mouse = new Mouse(WIDTH * 0.2, HEIGHT * 0.1);
   figures.push(mouse);
-  const delia = new Delia(WIDTH / 2, HEIGHT / 2, mouse, {
+  const delia = new Delia(mouse.x, mouse.y, mouse, {
     head: assets.delia_head,
     standing: assets.delia_standing,
     running: [assets.delia_running_1, assets.delia_running_2],
@@ -76,11 +76,34 @@ export function setup(context: P5I) {
 }
 
 export function draw(context: P5I) {
-  const { height, push, pop, scale, translate, clear } = context;
+  const {
+    width,
+    height,
+    push,
+    pop,
+    scale,
+    translate,
+    clear,
+    image,
+    imageMode,
+    CENTER,
+  } = context;
   clear();
   push();
   scale(1, -1);
   translate(0, -height);
+
+  imageMode(CENTER);
+  push();
+  translate(width * 0.8, height * 0.55);
+  scale(1, -1);
+  image(assets.fireplace, 0, 0);
+  pop();
+  push();
+  translate(width * 0.2, height * 0.60);
+  scale(0.8, -0.8);
+  image(assets.xmas_tree, 0, 0);
+  pop();
 
   // Sort figures by y
   figures.forEach((f: Drawable) => f.animate(context, figures));
@@ -109,7 +132,7 @@ export function mouseDragged(context: P5I) {
   return false;
 }
 
-function setMousePosition({ mouseX, mouseY, height }: P5I) {
+function setMousePosition({ mouseX, mouseY, height, min }: P5I) {
   mouse.x = mouseX;
-  mouse.y = height - mouseY;
+  mouse.y = min(height * 0.45, height - mouseY);
 }
