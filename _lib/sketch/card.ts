@@ -25,7 +25,11 @@ export function setup(context: P5I) {
   frameRate(30);
   mouse = new Mouse(WIDTH / 2, HEIGHT / 2);
   figures.push(mouse);
-  const delia = new Delia(WIDTH / 2, HEIGHT / 2, mouse);
+  const delia = new Delia(WIDTH / 2, HEIGHT / 2, mouse, {
+    head: assets.delia_head,
+    standing: assets.delia_standing,
+    running: [assets.delia_running_1, assets.delia_running_2],
+  });
   figures.push(delia);
   figures.push(
     new Figure({

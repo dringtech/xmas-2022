@@ -11,7 +11,7 @@ site.use(esbuild({
   options: {
     bundle: true,
     format: "iife",
-    // minify: true,
+    minify: false,
     incremental: true,
     treeShaking: true,
   },
