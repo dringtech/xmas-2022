@@ -86,22 +86,25 @@ export function draw(context: P5I) {
     clear,
     image,
     imageMode,
-    CENTER,
+    CORNER,
+    max,
   } = context;
   clear();
   push();
   scale(1, -1);
   translate(0, -height);
 
-  imageMode(CENTER);
+  imageMode(CORNER);
   push();
-  translate(width * 0.8, height * 0.55);
-  scale(1, -1);
+  const fireplaceScaleFactor = width/1000;
+  translate(width - assets.fireplace.width * fireplaceScaleFactor, max(height/2, assets.fireplace.height * fireplaceScaleFactor));
+  scale(fireplaceScaleFactor, -fireplaceScaleFactor);
   image(assets.fireplace, 0, 0);
   pop();
   push();
-  translate(width * 0.2, height * 0.60);
-  scale(0.8, -0.8);
+  const treeScaleFactor = width/1000;
+  translate(0, max(assets.xmas_tree.height * treeScaleFactor, height / 2));
+  scale(treeScaleFactor, -treeScaleFactor);
   image(assets.xmas_tree, 0, 0);
   pop();
 
@@ -134,5 +137,5 @@ export function mouseDragged(context: P5I) {
 
 function setMousePosition({ mouseX, mouseY, height, min }: P5I) {
   mouse.x = mouseX;
-  mouse.y = min(height * 0.45, height - mouseY);
+  mouse.y = min(height, height - mouseY);
 }
