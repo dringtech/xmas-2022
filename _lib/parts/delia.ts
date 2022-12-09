@@ -1,6 +1,6 @@
 import { Image, P5I } from "p5i";
 import { Drawable } from "lib/utils/drawable.ts";
-import { calculateVectorToTarget } from "lib/utils/vector.ts";
+import { calculateVectorToTarget, rangeToTarget } from "lib/utils/vector.ts";
 
 const DEBUG = false;
 
@@ -15,13 +15,24 @@ export class Delia extends Drawable {
   private vector: [number, number];
   private standing: boolean;
   private mirror: boolean;
+  desired: Drawable;
   sprites: SpriteArray;
-  constructor(x: number, y: number, target: Drawable, sprites: SpriteArray) {
+  hunting: boolean;
+  constructor(
+    x: number,
+    y: number,
+    target: Drawable,
+    sprites: SpriteArray,
+    desired: Drawable,
+  ) {
     super(x, y);
     this.target = target;
     this.vector = [0, 0];
     this.sprites = sprites;
+    this.desired = desired;
     this.standing = true;
+    this.mirror = false;
+    this.hunting = true;
   }
   sprite(
     { line, push, pop, scale, CENTER, image, imageMode, frameCount, floor }:
@@ -42,12 +53,24 @@ export class Delia extends Drawable {
 
     pop();
   }
-  animate({}: P5I): void {
-    const speed = 20;
+  animate({ width }: P5I): void {
+    if (this.hunting && rangeToTarget(this, this.desired) < 30) {
+      this.active = true;
+    }
+    if (rangeToTarget(this, this.desired) > 100) this.hunting = true;
+    const speed = width / 30;
     this.vector = calculateVectorToTarget(this, this.target, speed);
     this.x = this.x + this.vector[0];
     this.y = this.y + this.vector[1];
     this.standing = (this.vector[0] === 0) || (this.vector[1] === 0);
     if (!this.standing) this.mirror = this.vector[0] < 0;
+    if (this.active) {
+      this.desired.x = this.x;
+      this.desired.y = this.y;
+    }
+  }
+  drop() {
+    this.active = false;
+    this.hunting = false;
   }
 }

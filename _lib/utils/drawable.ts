@@ -1,16 +1,17 @@
 import { P5I } from "p5i";
 
-export abstract class Drawable {
+export class Drawable {
   initPos: [number, number];
   x: number;
   y: number;
   ghost: boolean;
+  active: boolean;
 
   constructor(x: number, y: number) {
-    this.initPos = [x, y];
     this.x = x;
     this.y = y;
     this.ghost = false;
+    this.active = false;
   }
 
   sprite({ circle }: P5I): void {

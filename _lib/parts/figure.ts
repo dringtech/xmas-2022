@@ -39,29 +39,53 @@ export class Figure extends Drawable implements FigureConfig {
   target: Drawable;
   head: Image;
   private noiseSeed: number;
+  private initPos: [number, number];
+  private wait: boolean;
 
-  constructor(config: FigureConfig, { random }: P5I) {
+  constructor(config: FigureConfig, { random, width, height }: P5I) {
     const { x, y, name = "unnamed", target, head = undefined } = config;
-    super(x, y);
+    super(x * width, y * height);
     this.name = name;
     this.running = true;
     this.target = target;
     this.head = head;
     this.noiseSeed = random(1000);
+    this.initPos = [x, y];
+    this.wait = false;
   }
-  animate({ noise }: P5I, figures: Drawable[]): void {
+
+  animate({ noise, width, height }: P5I, figures: Drawable[]): void {
+    if (this.target.active && rangeToTarget(this, this.target) < 50) {
+      this.makeDrop();
+    }
+    const target = (this.target.active || this.wait === true)
+      ? this.target
+      : new Drawable(this.initPos[0] * width, this.initPos[1] * height);
     if (!this.running) return;
     this.noiseSeed += jitterbug;
     const speed = 5;
-    const jitterScale = speed * 2;
+    const jitterScale = 10;
     const jitter = [noise(this.noiseSeed), noise(this.noiseSeed + 10000)].map(
       (v) => (v - 0.5) * jitterScale,
     );
-    const vector = calculateVectorToTarget(this, this.target, speed);
+    const vector = calculateVectorToTarget(this, target, speed);
     // if (rangeToTarget(this, this.target) < 50) vector = [0, 0];
     const repulsion = calculateRepulsion(this, figures);
     this.x = this.x + vector[0] + repulsion[0] + jitter[0];
     this.y = this.y + vector[1] + repulsion[1] + jitter[1];
+  }
+
+  makeDrop() {
+    this.target.drop();
+    this.wait = true;
+    setTimeout(
+      (me) => {
+        console.log("Yo!");
+        me.wait = false;
+      },
+      2000,
+      this,
+    );
   }
 
   sprite(

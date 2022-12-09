@@ -3,6 +3,7 @@ import { Figure } from "lib/parts/figure.ts";
 import { Delia } from "lib/parts/delia.ts";
 import { Mouse } from "lib/parts/mouse.ts";
 import { Drawable } from "lib/util/drawable.ts";
+import { Turkey } from "../parts/turkey.ts";
 
 const figures: Drawable[] = [];
 let mouse: Mouse;
@@ -24,24 +25,26 @@ function getBoundingBox() {
 }
 
 export function setup(context: P5I) {
-  const { createCanvas, stroke, frameRate, random } = context;
+  const { createCanvas, stroke, frameRate } = context;
   const { width: WIDTH, height: HEIGHT } = getBoundingBox();
   createCanvas(WIDTH, HEIGHT);
   stroke(255);
   frameRate(30);
   mouse = new Mouse(WIDTH * 0.2, HEIGHT * 0.1);
   figures.push(mouse);
+  const turkey = new Turkey(WIDTH / 2, HEIGHT / 2);
+  figures.push(turkey);
   const delia = new Delia(mouse.x, mouse.y, mouse, {
     head: assets.delia_head,
     standing: assets.delia_standing,
     running: [assets.delia_running_1, assets.delia_running_2],
-  });
+  }, turkey);
   figures.push(delia);
   figures.push(
     new Figure({
       name: "Giles",
-      x: WIDTH * 1 / 5,
-      y: random(0.5, 1.5) * HEIGHT / 4,
+      x: 0.25,
+      y: 0.75,
       target: delia,
       head: assets.giles,
     }, context),
@@ -49,8 +52,8 @@ export function setup(context: P5I) {
   figures.push(
     new Figure({
       name: "Rebecca",
-      x: WIDTH * 2 / 5,
-      y: random(0.5, 1.5) * HEIGHT / 4,
+      x: 0.75,
+      y: 0.75,
       target: delia,
       head: assets.rebecca,
     }, context),
@@ -58,8 +61,8 @@ export function setup(context: P5I) {
   figures.push(
     new Figure({
       name: "Martha",
-      x: WIDTH * 3 / 5,
-      y: random(0.5, 1.5) * HEIGHT / 4,
+      x: 0.75,
+      y: 0.25,
       target: delia,
       head: assets.martha,
     }, context),
@@ -67,8 +70,8 @@ export function setup(context: P5I) {
   figures.push(
     new Figure({
       name: "Bea",
-      x: WIDTH * 4 / 5,
-      y: random(0.5, 1.5) * HEIGHT / 4,
+      x: 0.25,
+      y: 0.255,
       target: delia,
       head: assets.bea,
     }, context),
@@ -96,13 +99,16 @@ export function draw(context: P5I) {
 
   imageMode(CORNER);
   push();
-  const fireplaceScaleFactor = width/1000;
-  translate(width - assets.fireplace.width * fireplaceScaleFactor, max(height/2, assets.fireplace.height * fireplaceScaleFactor));
+  const fireplaceScaleFactor = width / 1000;
+  translate(
+    width - assets.fireplace.width * fireplaceScaleFactor,
+    max(height / 2, assets.fireplace.height * fireplaceScaleFactor),
+  );
   scale(fireplaceScaleFactor, -fireplaceScaleFactor);
   image(assets.fireplace, 0, 0);
   pop();
   push();
-  const treeScaleFactor = width/1000;
+  const treeScaleFactor = width / 1000;
   translate(0, max(assets.xmas_tree.height * treeScaleFactor, height / 2));
   scale(treeScaleFactor, -treeScaleFactor);
   image(assets.xmas_tree, 0, 0);
