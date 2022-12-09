@@ -32,7 +32,7 @@ export function setup(context: P5I) {
   frameRate(30);
   mouse = new Mouse(WIDTH * 0.2, HEIGHT * 0.1);
   figures.push(mouse);
-  const turkey = new Turkey(WIDTH / 2, HEIGHT / 2);
+  const turkey = new Turkey(WIDTH / 2, HEIGHT / 2, assets.turkey);
   figures.push(turkey);
   const delia = new Delia(mouse.x, mouse.y, mouse, {
     head: assets.delia_head,

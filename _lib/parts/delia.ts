@@ -3,6 +3,7 @@ import { Drawable } from "lib/utils/drawable.ts";
 import { calculateVectorToTarget, rangeToTarget } from "lib/utils/vector.ts";
 
 const DEBUG = false;
+const SCALE = 0.4;
 
 interface SpriteArray {
   head: Image;
@@ -41,7 +42,7 @@ export class Delia extends Drawable {
     push();
     DEBUG && line(0, 0, this.vector[0], this.vector[1]);
     scale(this.mirror ? -1 : 1, -1);
-    scale(0.4);
+    scale(SCALE);
     imageMode(CENTER);
 
     const frame = floor(frameCount / 5) % this.sprites.running.length;
@@ -65,8 +66,9 @@ export class Delia extends Drawable {
     this.standing = (this.vector[0] === 0) || (this.vector[1] === 0);
     if (!this.standing) this.mirror = this.vector[0] < 0;
     if (this.active) {
-      this.desired.x = this.x;
-      this.desired.y = this.y;
+      this.desired.mirror = this.mirror;
+      this.desired.x = this.x + SCALE * (this.mirror ? -190 : 150);
+      this.desired.y = this.y + SCALE * 10;
     }
   }
   drop() {
