@@ -19,9 +19,7 @@ export function preload({ loadImage }: P5I) {
 }
 
 function getBoundingBox() {
-  const bbox = parent.getBoundingClientRect();
-  console.log(bbox);
-  return bbox;
+  return { width: parent?.clientWidth, height: parent?.clientHeight };
 }
 
 export function setup(context: P5I) {
@@ -126,6 +124,8 @@ export function windowResized(
 ) {
   const { width, height } = getBoundingBox();
   resizeCanvas(width, height);
+  getBoundingBox();
+  setTimeout(getBoundingBox(), 0);
 }
 
 export function mousePressed(context: P5I) {
