@@ -41,9 +41,16 @@ h1 {
   display: flex;
   justify-content: center;
   padding: 0.5em;
+  align-items: baseline;
+  font-size: 1.2rem;
 }
 button {
   font-size: inherit;
   font-family: inherit;
   padding: 0.5em 1em;
+}
+
+.score {
+  width: 6em;
+  text-align: end;
 }

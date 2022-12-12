@@ -1,6 +1,7 @@
 import { p5i } from "p5i";
 import * as sketch from "lib/sketch/card.ts";
 import { start as startSound, stop as stopSound, setTempo } from 'lib/music-player/music.ts';
+import { timer } from 'lib/timer.ts';
 
 const { mount } = p5i();
 
@@ -25,8 +26,16 @@ function setupSound() {
   }
 }
 
+function setupScore() {
+  const scoreBox = document.getElementById('score') as Element;
+  self.addEventListener('timerchanged', ({ detail }) => {
+    scoreBox.innerHTML = detail.toFixed(2) + ' s';
+  })
+  timer.reset();
+}
 
 addEventListener("DOMContentLoaded", () => {
   setupSound();
+  setupScore();
   mount(document.getElementById("cardCanvas"), sketch);
 });

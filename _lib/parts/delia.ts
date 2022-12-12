@@ -57,6 +57,7 @@ export class Delia extends Drawable {
   animate({ width }: P5I): void {
     if (this.hunting && rangeToTarget(this, this.desired) < 30) {
       this.active = true;
+      self.dispatchEvent(new CustomEvent('turkeySnaffled'));
     }
     if (rangeToTarget(this, this.desired) > 100) this.hunting = true;
     const speed = width / 30;
@@ -74,5 +75,6 @@ export class Delia extends Drawable {
   drop() {
     this.active = false;
     this.hunting = false;
+    self.dispatchEvent(new CustomEvent('turkeyDropped'));
   }
 }
