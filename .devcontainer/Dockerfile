@@ -13,3 +13,5 @@ ENV PATH=${DENO_INSTALL}/bin:${PATH} \
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 #    && apt-get -y install --no-install-recommends <your-package-list-here>
+USER vscode
+RUN deno install -qAn vr https://deno.land/x/velociraptor@1.5.0/cli.ts
