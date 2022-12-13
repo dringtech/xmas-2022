@@ -9,27 +9,27 @@ function setupSound() {
   const soundToggle = document.querySelector('#sound-toggle');
   let soundPlaying = false;
   
-  if (soundToggle !== null) {
-    soundToggle.addEventListener('click', () => {
-      console.log('Togglin ' + soundPlaying);
-      soundPlaying = toggleSound();
-    });  
-  }
-  
+  if (soundToggle === null) throw new Error('Button not found');
+
   const toggleSound = () => {
     if (soundPlaying) {
       stopSound();
+      soundToggle.innerHTML = 'Play Music';
       return false;
     }
     startSound();
+    soundToggle.innerHTML = 'Stop Music';
     return true;
   }
+  soundToggle.addEventListener('click', () => {
+    soundPlaying = toggleSound();
+  });
 }
 
 function setupScore() {
-  const scoreBox = document.getElementById('score') as Element;
+  const scoreBox = document.querySelector('#score .time') as Element;
   self.addEventListener('timerchanged', ({ detail }) => {
-    scoreBox.innerHTML = detail.toFixed(2) + ' s';
+    scoreBox.innerHTML = detail.toFixed(2);
   })
   timer.reset();
 }

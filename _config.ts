@@ -1,5 +1,6 @@
 import lume from "lume/mod.ts";
 import base_path from "lume/plugins/base_path.ts";
+import postcss from "lume/plugins/postcss.ts";
 import esbuild from "lume/plugins/esbuild.ts";
 
 const site = lume();
@@ -16,4 +17,6 @@ site.use(esbuild({
     treeShaking: true,
   },
 }));
+site.use(postcss());
+
 export default site;

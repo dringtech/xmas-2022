@@ -1,36 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap');
-html {
-  height: 100%;
+
+* {
+  box-sizing: content-box;
+  margin: 0;
+  padding: 0;
+  font-family: inherit;
+  font-size: inherit;
 }
-body {
+
+html {
   font-size: 100%;
-  height: 100%;
+}
+
+body {
   padding: 0;
   margin: 0;
   background: rgb(19, 16, 92);
   font-family: 'Gloria Hallelujah', cursive;
 }
 
-div {
-  box-sizing: content-box;
-}
-
 main {
-  height: 100%;
+  block-size: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
   color: white;
   overflow: hidden;
-}
-h1 {
-  font-size: 5vw;
   text-align: center;
-  padding: 0 2rem;
+}
+
+h1 {
+  font-size: min(4rem, 4.5vw);
 }
 
 .sketch {
-  width: 100%;
+  width: 100vw;
   flex-grow: 1;
   overflow: hidden;
   padding: 0;
@@ -40,17 +43,25 @@ h1 {
 .controls {
   display: flex;
   justify-content: center;
-  padding: 0.5em;
+  padding: 0.5rem;
   align-items: baseline;
   font-size: 1.2rem;
+  gap: 1rem;
+  & > :empty {
+    flex-grow: 1;
+  }
 }
 button {
   font-size: inherit;
   font-family: inherit;
-  padding: 0.5em 1em;
+  padding: 0.1rem 1rem;
+  min-inline-size: 10ch;
 }
 
-.score {
-  width: 6em;
-  text-align: end;
+#score {
+  & > .time {
+    font-family: monospace;
+    text-align: end;
+    width: 6em;
+  }
 }
