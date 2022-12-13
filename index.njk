@@ -1,11 +1,35 @@
+---
+title: Merry Christmas 2022 from the Drings!
+---
 <main>
-<h1>Happy Christmas 2022 from the Drings!</h1>
+<h1>{{ title }}</h1>
 <div id="cardCanvas" class="sketch"></div>
 <div class="controls">
   <button id="sound-toggle">Play Music</button>
   <div></div>
   <div id="score">Score: <span class="time"></span> s</div>
 </div>
+<div class="background">
+  <img style="right: 5vw; bottom: 20vh; max-block-size: 30vh;" src="/assets/images/fireplace.svg" inline>
+  <img style="left: 5vw; top: 20vh; max-block-size: 40vh;" src="/assets/images/xmas_tree.svg" inline>
+</div>
+<aside id="instructions" class="stack layover">
+  <h1>{{ title }}</h1>
+  <p>
+    This year, we're donating the money we would have spent
+    on cards to <a href="https://www.trusselltrust.org/make-a-donation/">The Trussell Trust</a>
+  </p>
+  <img src="/assets/images/trussell.svg">
+  <p>
+    Here's our traditional homemade e-card
+  </p>
+  <p>
+    Help Delia steal the Christmas turkey,
+    using your mouse or finger.
+    How long can you evade the family?
+  </p>
+  <p><button id="ready">Ready to play?</button></p>
+</aside>
 </main>
 <script>
   const assetsUrls = {
@@ -18,8 +42,6 @@
     delia_running_1: "{{ '/assets/images/delia-run-1.svg' | url() }}",
     delia_running_2: "{{ '/assets/images/delia-run-2.svg' | url() }}",
     turkey: "{{ '/assets/images/turkey.svg' | url() }}",
-    xmas_tree: "{{ '/assets/images/xmas_tree.svg' | url() }}",
-    fireplace: "{{ '/assets/images/fireplace.svg' | url() }}",
   };
 </script>
 <script src="/assets/js/xmas.js"></script>

@@ -80,7 +80,6 @@ export class Figure extends Drawable implements FigureConfig {
     this.wait = true;
     setTimeout(
       (me) => {
-        console.log("Yo!");
         me.wait = false;
       },
       2000,

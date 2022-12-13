@@ -7,6 +7,9 @@
   font-family: inherit;
   font-size: inherit;
 }
+[hidden] {
+  display: none;
+}
 
 html {
   font-size: 100%;
@@ -16,6 +19,7 @@ body {
   padding: 0;
   margin: 0;
   background: rgb(19, 16, 92);
+  background: rgb(10, 120, 60);
   font-family: 'Gloria Hallelujah', cursive;
 }
 
@@ -26,6 +30,7 @@ main {
   color: white;
   overflow: hidden;
   text-align: center;
+  position: relative;
 }
 
 h1 {
@@ -36,24 +41,20 @@ h1 {
   width: 100vw;
   flex-grow: 1;
   overflow: hidden;
-  padding: 0;
-  margin: 0;
+  background: rgba(200,200,200, 0.3)
 }
 
 .controls {
   display: flex;
-  justify-content: center;
   padding: 0.5rem;
   align-items: baseline;
-  font-size: 1.2rem;
+  font-size: min(4vw, 1.2rem);
   gap: 1rem;
   & > :empty {
     flex-grow: 1;
   }
 }
 button {
-  font-size: inherit;
-  font-family: inherit;
   padding: 0.1rem 1rem;
   min-inline-size: 10ch;
 }
@@ -64,4 +65,33 @@ button {
     text-align: end;
     width: 6em;
   }
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  & > img {
+    position: absolute;
+  }
+}
+
+.layover {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+#instructions {
+  background: white;
+  color: green;
+}
+
+.stack * + * {
+  margin-block-start: 1.5rem;
 }

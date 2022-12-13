@@ -23,7 +23,7 @@ function getBoundingBox() {
 }
 
 export function setup(context: P5I) {
-  const { createCanvas, stroke, frameRate } = context;
+  const { createCanvas, stroke, frameRate, noLoop, loop } = context;
   const { width: WIDTH, height: HEIGHT } = getBoundingBox();
   createCanvas(WIDTH, HEIGHT);
   stroke(255);
@@ -74,6 +74,10 @@ export function setup(context: P5I) {
       head: assets.bea,
     }, context),
   );
+  self.addEventListener('startGame', () => {
+    loop();
+  })
+  noLoop();
 }
 
 export function draw(context: P5I) {
@@ -85,32 +89,11 @@ export function draw(context: P5I) {
     scale,
     translate,
     clear,
-    image,
-    imageMode,
-    CORNER,
-    max,
   } = context;
   clear();
   push();
   scale(1, -1);
   translate(0, -height);
-
-  imageMode(CORNER);
-  push();
-  const fireplaceScaleFactor = width / 1000;
-  translate(
-    width - assets.fireplace.width * fireplaceScaleFactor,
-    max(height / 2, assets.fireplace.height * fireplaceScaleFactor),
-  );
-  scale(fireplaceScaleFactor, -fireplaceScaleFactor);
-  image(assets.fireplace, 0, 0);
-  pop();
-  push();
-  const treeScaleFactor = width / 1000;
-  translate(0, max(assets.xmas_tree.height * treeScaleFactor, height / 2));
-  scale(treeScaleFactor, -treeScaleFactor);
-  image(assets.xmas_tree, 0, 0);
-  pop();
 
   // Sort figures by y
   figures.forEach((f: Drawable) => f.animate(context, figures));

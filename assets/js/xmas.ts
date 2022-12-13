@@ -34,8 +34,20 @@ function setupScore() {
   timer.reset();
 }
 
+function setupPlay() {
+  const playButton = document.querySelector('#ready') as HTMLElement;
+  const instructions = document.querySelector('#instructions') as HTMLElement;
+  self.addEventListener('startGame', () => {
+    instructions.hidden = true;
+  })
+  playButton.addEventListener('click', () => {
+    self.dispatchEvent(new CustomEvent('startGame'));
+  });
+}
+
 addEventListener("DOMContentLoaded", () => {
   setupSound();
   setupScore();
+  setupPlay();
   mount(document.getElementById("cardCanvas"), sketch);
 });
