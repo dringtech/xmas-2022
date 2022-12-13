@@ -90,6 +90,11 @@ button {
 #instructions {
   background: white;
   color: green;
+  font-size: 1.2rem;
+  overflow-y: scroll;
+  & h1 {
+    font-size: 1.2em;
+  }
 }
 
 .stack * + * {
