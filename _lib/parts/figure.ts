@@ -55,7 +55,7 @@ export class Figure extends Drawable implements FigureConfig {
   }
 
   animate({ noise, width, height }: P5I, figures: Drawable[]): void {
-    if (this.target.active && rangeToTarget(this, this.target) < 50) {
+    if (this.target.active && rangeToTarget(this, this.target) < 30) {
       this.makeDrop();
     }
     const target = (this.target.active || this.wait === true)
@@ -63,7 +63,7 @@ export class Figure extends Drawable implements FigureConfig {
       : new Drawable(this.initPos[0] * width, this.initPos[1] * height);
     if (!this.running) return;
     this.noiseSeed += jitterbug;
-    const speed = 5;
+    const speed = width / 200;
     const jitterScale = 10;
     const jitter = [noise(this.noiseSeed), noise(this.noiseSeed + 10000)].map(
       (v) => (v - 0.5) * jitterScale,

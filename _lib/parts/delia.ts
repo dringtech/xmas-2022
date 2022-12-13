@@ -57,12 +57,12 @@ export class Delia extends Drawable {
   }
   animate({ width, height, constrain }: P5I): void {
     this.ctx = { width, height };
-    if (this.hunting && rangeToTarget(this, this.desired) < 30) {
+    if (this.hunting && rangeToTarget(this, this.desired) < 50) {
       this.active = true;
       self.dispatchEvent(new CustomEvent('turkeySnaffled'));
     }
     if (rangeToTarget(this, this.desired) > 100) this.hunting = true;
-    const speed = width / 15;
+    const speed = constrain(width / 30, 30, 100);
     this.vector = calculateVectorToTarget(this, this.target, speed);
     this.x = constrain(this.x + this.vector[0], 70, width-70);
     this.y = constrain(this.y + this.vector[1], 20, height-40);
