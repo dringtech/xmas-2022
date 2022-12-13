@@ -19,6 +19,7 @@ export class Delia extends Drawable {
   desired: Drawable;
   sprites: SpriteArray;
   hunting: boolean;
+  private ctx: unknown;
   constructor(
     x: number,
     y: number,
@@ -54,16 +55,17 @@ export class Delia extends Drawable {
 
     pop();
   }
-  animate({ width }: P5I): void {
+  animate({ width, height, constrain }: P5I): void {
+    this.ctx = { width, height };
     if (this.hunting && rangeToTarget(this, this.desired) < 30) {
       this.active = true;
       self.dispatchEvent(new CustomEvent('turkeySnaffled'));
     }
     if (rangeToTarget(this, this.desired) > 100) this.hunting = true;
-    const speed = width / 30;
+    const speed = width / 15;
     this.vector = calculateVectorToTarget(this, this.target, speed);
-    this.x = this.x + this.vector[0];
-    this.y = this.y + this.vector[1];
+    this.x = constrain(this.x + this.vector[0], 70, width-70);
+    this.y = constrain(this.y + this.vector[1], 20, height-40);
     this.standing = (this.vector[0] === 0) || (this.vector[1] === 0);
     if (!this.standing) this.mirror = this.vector[0] < 0;
     if (this.active) {
@@ -73,8 +75,11 @@ export class Delia extends Drawable {
     }
   }
   drop() {
+    const { width, height } = this.ctx;
     this.active = false;
     this.hunting = false;
+    this.desired.x = width / 2;
+    this.desired.y = height / 2;
     self.dispatchEvent(new CustomEvent('turkeyDropped'));
   }
 }
