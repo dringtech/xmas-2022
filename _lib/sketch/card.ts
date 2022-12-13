@@ -125,6 +125,7 @@ export function mouseDragged(context: P5I) {
 }
 
 function setMousePosition({ mouseX, mouseY, height, min }: P5I) {
+  if (mouse === undefined) return;
   mouse.x = mouseX;
   mouse.y = min(height, height - mouseY);
 }
