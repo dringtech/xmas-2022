@@ -31,6 +31,7 @@ interface FigureConfig {
   y: number;
   target: Drawable;
   head: Image;
+  body: Image[];
 }
 
 export class Figure extends Drawable implements FigureConfig {
@@ -38,20 +39,24 @@ export class Figure extends Drawable implements FigureConfig {
   running: boolean;
   target: Drawable;
   head: Image;
+  body: Image[];
   private noiseSeed: number;
-  private initPos: [number, number];
+  initPos: [number, number];
   private wait: boolean;
+  private mirror: boolean;
 
   constructor(config: FigureConfig, { random, width, height }: P5I) {
-    const { x, y, name = "unnamed", target, head = undefined } = config;
+    const { x, y, name = "unnamed", target, head = undefined, body = [] } = config;
     super(x * width, y * height);
     this.name = name;
     this.running = true;
     this.target = target;
     this.head = head;
+    this.body = body;
     this.noiseSeed = random(1000);
     this.initPos = [x, y];
     this.wait = false;
+    this.mirror = false;
   }
 
   animate({ noise, width, height }: P5I, figures: Drawable[]): void {
@@ -73,6 +78,7 @@ export class Figure extends Drawable implements FigureConfig {
     const repulsion = calculateRepulsion(this, figures);
     this.x = this.x + vector[0] + repulsion[0] + jitter[0];
     this.y = this.y + vector[1] + repulsion[1] + jitter[1];
+    this.mirror = vector[0] > 0;
   }
 
   makeDrop() {
@@ -101,6 +107,8 @@ export class Figure extends Drawable implements FigureConfig {
       image,
       imageMode,
       translate,
+      floor,
+      frameCount,
     }: P5I,
   ): void {
     push();
@@ -109,16 +117,25 @@ export class Figure extends Drawable implements FigureConfig {
     fill("white");
     scale(1, -1);
     textAlign(CENTER, CENTER);
-    text(this.name, 0, 30);
-    circle(0, 0, 30);
+    text(this.name, 0, 90);
     imageMode(CENTER);
+
+    scale(0.3);
+
+    push();
+    scale(this.mirror ? -1 : 1, 1);
+    const frame = floor(frameCount / 5) % this.body.length;
+    const sprite = this.body[frame];
+    translate(0, 130);
+    image(sprite, 0, 0);
+    pop();
 
     push();
     translate(0, -20);
-    scale(0.3);
     if (this.head) image(this.head, 0, 0);
     scale(1);
     pop();
+
     pop();
   }
 }

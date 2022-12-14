@@ -45,6 +45,7 @@ export function setup(context: P5I) {
       y: 0.75,
       target: delia,
       head: assets.giles,
+      body: [assets.body_a, assets.body_b],
     }, context),
   );
   figures.push(
@@ -54,6 +55,7 @@ export function setup(context: P5I) {
       y: 0.75,
       target: delia,
       head: assets.rebecca,
+      body: [assets.body_a, assets.body_b],
     }, context),
   );
   figures.push(
@@ -63,6 +65,7 @@ export function setup(context: P5I) {
       y: 0.25,
       target: delia,
       head: assets.martha,
+      body: [assets.body_a, assets.body_b],
     }, context),
   );
   figures.push(
@@ -72,6 +75,7 @@ export function setup(context: P5I) {
       y: 0.255,
       target: delia,
       head: assets.bea,
+      body: [assets.body_a, assets.body_b],
     }, context),
   );
   addEventListener('startGame', () => {
