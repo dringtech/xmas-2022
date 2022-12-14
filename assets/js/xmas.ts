@@ -5,31 +5,31 @@ import { timer } from 'lib/timer.ts';
 
 const { mount } = p5i();
 
+let soundPlaying = false;
+
 function setupSound() {
-  const soundToggle = document.querySelector('#sound-toggle');
-  let soundPlaying = false;
-  
+  const soundToggle = document.querySelector('#sound-toggle') as Element;
   if (soundToggle === null) throw new Error('Button not found');
 
-  const toggleSound = () => {
-    if (soundPlaying) {
-      stopSound();
-      soundToggle.innerHTML = 'Play Music';
-      soundPlaying = false;
-      return;
-    }
+  function play() {
+    if (soundPlaying) return;
     startSound();
     soundToggle.innerHTML = 'Stop Music';
     soundPlaying = true;
-    return
   }
-  soundToggle.addEventListener('click', () => {
-    soundPlaying = toggleSound();
-  });
-  soundToggle.addEventListener('touchstart', () => {
-    soundPlaying = toggleSound();
-  });
-  addEventListener('startGame', toggleSound);
+  function stop() {
+    if (!soundPlaying) return;
+    stopSound();
+    soundToggle.innerHTML = 'Play Music';
+    soundPlaying = false;
+  }
+
+  function toggleSound () {
+    if (soundPlaying) stop();
+    else play();
+  }
+  soundToggle.addEventListener('click', toggleSound);
+  addEventListener('startGame', play);
 }
 
 function setupScore() {
