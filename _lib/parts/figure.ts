@@ -55,7 +55,7 @@ export class Figure extends Drawable implements FigureConfig {
   }
 
   animate({ noise, width, height }: P5I, figures: Drawable[]): void {
-    if (this.target.active && rangeToTarget(this, this.target) < 30) {
+    if (this.target.active && rangeToTarget(this, this.target) < 40) {
       this.makeDrop();
     }
     const target = (this.target.active || this.wait === true)
