@@ -48,6 +48,13 @@ function startGame() {
 function setupObserver() {
   const controls = document.querySelector('#controls');
   if (controls === null) throw new Error("Controls not defined");
+  const { top } = controls.getBoundingClientRect()
+  console.log(top, window.innerHeight);
+  if ( top < window.innerHeight) {
+    startGame();
+    return;
+  }
+
   // Observer options.
   const options = {
     root: null,
@@ -73,8 +80,10 @@ function setupObserver() {
 }
 
 addEventListener("DOMContentLoaded", () => {
+  mount(document.getElementById("cardCanvas"), sketch);
   setupSound();
   setupScore();
-  setupObserver();
-  mount(document.getElementById("cardCanvas"), sketch);
+  addEventListener('cardLoaded', () => {
+    setupObserver();
+  })
 });

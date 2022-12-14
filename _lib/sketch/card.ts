@@ -78,6 +78,7 @@ export function setup(context: P5I) {
     loop();
   })
   noLoop();
+  dispatchEvent(new CustomEvent('cardLoaded'));
 }
 
 export function draw(context: P5I) {
