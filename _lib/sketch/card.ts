@@ -124,8 +124,8 @@ export function mouseDragged(context: P5I) {
   if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height ) return false;
 }
 
-function setMousePosition({ mouseX, mouseY, height, min }: P5I) {
+function setMousePosition({ mouseX, mouseY, width, height, constrain, min }: P5I) {
   if (mouse === undefined) return;
-  mouse.x = mouseX;
-  mouse.y = min(height, height - mouseY);
+  mouse.x = constrain(mouseX, 70, width-70);
+  mouse.y = constrain(height - mouseY, 20, height-40);
 }

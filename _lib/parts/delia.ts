@@ -64,8 +64,8 @@ export class Delia extends Drawable {
     if (rangeToTarget(this, this.desired) > 100) this.hunting = true;
     const speed = constrain(width / 30, 30, 100);
     this.vector = calculateVectorToTarget(this, this.target, speed);
-    this.x = constrain(this.x + this.vector[0], 70, width-70);
-    this.y = constrain(this.y + this.vector[1], 20, height-40);
+    this.x = this.x + this.vector[0];
+    this.y = this.y + this.vector[1];
     this.standing = (this.vector[0] === 0) || (this.vector[1] === 0);
     if (!this.standing) this.mirror = this.vector[0] < 0;
     if (this.active) {
