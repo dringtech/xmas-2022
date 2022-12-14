@@ -90,12 +90,18 @@ button {
   left: 0;
   block-size: 100vh;
   inline-size: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   background: white;
   color: green;
   text-align: center;
   transition: top 1s ease-in-out;
   & h1 {
-    font-size: 1.2em;
+    font-size: 1.6em;
+  }
+  & img {
+    width: 20vw;
   }
 }
 
