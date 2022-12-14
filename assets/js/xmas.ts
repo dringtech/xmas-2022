@@ -23,13 +23,12 @@ function setupSound() {
     soundToggle.innerHTML = 'Play Music';
     soundPlaying = false;
   }
-
   function toggleSound () {
     if (soundPlaying) stop();
     else play();
   }
   soundToggle.addEventListener('click', toggleSound);
-  addEventListener('startGame', play);
+  stop();
 }
 
 function setupScore() {
@@ -41,42 +40,23 @@ function setupScore() {
 }
 
 function startGame() {
-  console.log('Starting');
   dispatchEvent(new CustomEvent('startGame'));
 }
 
-function setupObserver() {
-  const controls = document.querySelector('#controls');
-  if (controls === null) throw new Error("Controls not defined");
-  const { top } = controls.getBoundingClientRect()
-  console.log(top, window.innerHeight);
-  if ( top < window.innerHeight) {
-    startGame();
-    return;
+function setupStart() {
+  const startButton = document.querySelector('#start');
+  if (startButton === null) throw new Error("Start Button not found");
+  const instructions = document.querySelector('#instructions') as HTMLElement;
+  if (instructions === null) throw new Error("Start Button not found");
+
+  function hideInstructions() {
+    instructions.style.top = '-100vh';
+    removeEventListener('startGame', hideInstructions);
   }
+  addEventListener('startGame', hideInstructions);
 
-  // Observer options.
-  const options = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.7,
-  };
-  // Callback function executed during observe.
-  const callback = function( entries: IntersectionObserverEntry[], observer: IntersectionObserver ) {
-    const observedItem = entries[0];
-    if (observedItem.isIntersecting) {
-      startGame();
-      observer.unobserve(controls);
-    }
-  };
-
-  // Construct Intersection Observer.
-  const observer = new IntersectionObserver( callback, options );
-
-  // Observe if element is present.
-  if ( controls ) {
-    observer.observe( controls );
-  }
+  startButton.addEventListener('click', startGame)
+  startButton.addEventListener('touchstart', startGame)
 }
 
 addEventListener("DOMContentLoaded", () => {
@@ -84,6 +64,6 @@ addEventListener("DOMContentLoaded", () => {
   setupSound();
   setupScore();
   addEventListener('cardLoaded', () => {
-    setupObserver();
+    setupStart();
   })
 });

@@ -85,10 +85,15 @@ button {
 }
 
 #instructions {
+  position: absolute;
+  top: 0;
+  left: 0;
   block-size: 100vh;
+  inline-size: 100vw;
   background: white;
   color: green;
   text-align: center;
+  transition: top 1s ease-in-out;
   & h1 {
     font-size: 1.2em;
   }

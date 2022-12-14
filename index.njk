@@ -1,6 +1,23 @@
 ---
 title: Merry Christmas 2022 from the Drings!
 ---
+<main>
+  <h1>{{ title }}</h1>
+
+  <div id="cardCanvas" class="sketch"></div>
+
+  <div id="controls" class="controls">
+    <button id="sound-toggle">Play Music</button>
+    <div></div>
+    <div id="score">Score: <span class="time"></span> s</div>
+  </div>
+
+  <div class="background">
+    <img style="right: 5vw; bottom: 20vh; max-block-size: 30vh;" src="/assets/images/fireplace.svg" inline>
+    <img style="left: 5vw; top: 20vh; max-block-size: 40vh;" src="/assets/images/xmas_tree.svg" inline>
+  </div>
+</main>
+
 <aside id="instructions" class="stack">
   <h1>{{ title }}</h1>
   <p>
@@ -16,24 +33,9 @@ title: Merry Christmas 2022 from the Drings!
     using your mouse or finger.
     How long can you evade the family?
   </p>
-  <p><a href="#controls">Ready to play?</a></p>
+  <p><button id="start">Ready to play?</button></p>
 </aside>
 
-<main>
-  <h1>{{ title }}</h1>
-
-  <div id="cardCanvas" class="sketch"></div>
-
-  <div id="controls" class="controls">
-    <button id="sound-toggle">Play Music</button>
-    <div></div>
-    <div id="score">Score: <span class="time"></span> s</div>
-  </div>
-  <div class="background">
-    <img style="right: 5vw; bottom: 20vh; max-block-size: 30vh;" src="/assets/images/fireplace.svg" inline>
-    <img style="left: 5vw; top: 20vh; max-block-size: 40vh;" src="/assets/images/xmas_tree.svg" inline>
-  </div>
-</main>
 <script>
   const assetsUrls = {
     giles: "{{ '/assets/images/Giles.svg' | url() }}",
