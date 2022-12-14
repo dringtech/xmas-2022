@@ -1,8 +1,7 @@
 import { ctx } from "./audio-context.ts";
 import { Synth } from './synth.ts';
 
-import { notes, durations } from './scores/rudolph-the-red-nosed-reindeer.ts';
-// import { notes, durations } from './scores/jingle-bells.ts';
+import { notes, durations } from './scores/jingle-bells.ts';
 
 const synth = new Synth({
   attack: 0.005,
@@ -24,7 +23,7 @@ export function setTempo(newTempo) {
   tempo = 75/newTempo;
 }
 
-setTempo(120);
+setTempo(150);
 
 const playSequence = () => {
   if (!playing) return;
