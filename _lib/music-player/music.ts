@@ -1,8 +1,8 @@
 import { ctx } from "./audio-context.ts";
 import { Synth } from './synth.ts';
 
-import { notes, durations } from './scores/rudolph-the-red-nosed-reindeer.ts';
-// import { notes, durations } from './scores/santa-claus-is-coming-to-town';
+// import { notes, durations } from './scores/rudolph-the-red-nosed-reindeer.ts';
+import { notes, durations } from './scores/jingle-bells.ts';
 
 const synth = new Synth({
   attack: 0.005,

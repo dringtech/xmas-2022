@@ -96,3 +96,4 @@ const keyTable = freqTable.reduce((a, [midi, key, note, freq]) => ({ ...a, [key]
 const midiTable = freqTable.reduce((a, [midi, key, note, freq]) => ({ ...a, [midi]: freq }), {});
 
 export const noteToFreq = (note) => noteTable[note];
+export const midiToFreq = (midi) => midiTable[midi];
