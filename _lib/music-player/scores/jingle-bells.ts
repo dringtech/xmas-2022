@@ -136,4 +136,3 @@ const score = [
 
 export const notes = score.map((x) => x.note).map(midiToFreq);
 export const durations = score.map((x) => x.duration);
-console.log(durations);
