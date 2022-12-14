@@ -108,20 +108,20 @@ export function windowResized(
   const { width, height } = getBoundingBox();
   resizeCanvas(width, height);
   getBoundingBox();
-  setTimeout(getBoundingBox(), 0);
+  // setTimeout(getBoundingBox, 0);
 }
 
 export function mousePressed(context: P5I) {
   setMousePosition(context);
-  return false;
 }
 export function mouseMoved(context: P5I) {
   setMousePosition(context);
-  return false;
 }
 export function mouseDragged(context: P5I) {
   setMousePosition(context);
-  return false;
+  const { mouseX, mouseY, width, height } = context;
+  // Don't trigger default if inside canvas
+  if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height ) return false;
 }
 
 function setMousePosition({ mouseX, mouseY, height, min }: P5I) {

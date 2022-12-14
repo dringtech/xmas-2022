@@ -15,15 +15,21 @@ function setupSound() {
     if (soundPlaying) {
       stopSound();
       soundToggle.innerHTML = 'Play Music';
-      return false;
+      soundPlaying = false;
+      return;
     }
     startSound();
     soundToggle.innerHTML = 'Stop Music';
-    return true;
+    soundPlaying = true;
+    return
   }
   soundToggle.addEventListener('click', () => {
     soundPlaying = toggleSound();
   });
+  soundToggle.addEventListener('touchstart', () => {
+    soundPlaying = toggleSound();
+  });
+  addEventListener('startGame', toggleSound);
 }
 
 function setupScore() {
@@ -34,20 +40,41 @@ function setupScore() {
   timer.reset();
 }
 
-function setupPlay() {
-  const playButton = document.querySelector('#ready') as HTMLElement;
-  const instructions = document.querySelector('#instructions') as HTMLElement;
-  addEventListener('startGame', () => {
-    instructions.hidden = true;
-  })
-  playButton.addEventListener('click', () => {
-    dispatchEvent(new CustomEvent('startGame'));
-  });
+function startGame() {
+  console.log('Starting');
+  dispatchEvent(new CustomEvent('startGame'));
+}
+
+function setupObserver() {
+  const controls = document.querySelector('#controls');
+  if (controls === null) throw new Error("Controls not defined");
+  // Observer options.
+  const options = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.7,
+  };
+  // Callback function executed during observe.
+  const callback = function( entries: IntersectionObserverEntry[], observer: IntersectionObserver ) {
+    const observedItem = entries[0];
+    if (observedItem.isIntersecting) {
+      startGame();
+      observer.unobserve(controls);
+    }
+  };
+
+  // Construct Intersection Observer.
+  const observer = new IntersectionObserver( callback, options );
+
+  // Observe if element is present.
+  if ( controls ) {
+    observer.observe( controls );
+  }
 }
 
 addEventListener("DOMContentLoaded", () => {
   setupSound();
   setupScore();
-  setupPlay();
+  setupObserver();
   mount(document.getElementById("cardCanvas"), sketch);
 });
