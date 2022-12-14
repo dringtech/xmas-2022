@@ -4,7 +4,7 @@ import { Synth } from './synth.ts';
 import { notes, durations } from './scores/jingle-bells.ts';
 
 const synth = new Synth({
-  attack: 0.005,
+  attack: 0.05,
 });
 
 function* score() {

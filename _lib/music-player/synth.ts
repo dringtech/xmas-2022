@@ -45,7 +45,7 @@ export class Synth {
     env.connect(this.dist);
 
     const osc = ctx.createOscillator();
-    osc.type = 'triangle';
+    osc.type = 'square';
 
     osc.frequency.setValueAtTime(freq, startTime);
     osc.connect(env);
