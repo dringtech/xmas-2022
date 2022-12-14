@@ -54,7 +54,9 @@ function setupStart() {
     removeEventListener('startGame', hideInstructions);
   }
   addEventListener('startGame', hideInstructions);
-
+  addEventListener('startGame', () => {
+    document.getElementById('controls')?.scrollIntoView(true);
+  })
   startButton.addEventListener('click', startGame)
   startButton.addEventListener('touchstart', startGame)
 }
