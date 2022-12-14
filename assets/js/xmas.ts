@@ -29,6 +29,13 @@ function setupSound() {
   }
   soundToggle.addEventListener('click', toggleSound);
   stop();
+  addEventListener('turkeySnaffled', () => {
+    setTempo(220);
+  })
+  addEventListener('turkeyDropped', () => {
+    setTempo(150);
+  })
+  setTempo(150);
 }
 
 function setupScore() {
