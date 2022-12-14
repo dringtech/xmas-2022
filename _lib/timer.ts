@@ -6,8 +6,8 @@ class StreakTimer {
     this.time = 0;
     this.resolution = 0.01;
     this.timer = null;
-    self.addEventListener('turkeySnaffled', () => this.start());
-    self.addEventListener('turkeyDropped', () => this.stop());
+    addEventListener('turkeySnaffled', () => this.start());
+    addEventListener('turkeyDropped', () => this.stop());
   }
   start() {
     this.reset();
@@ -18,7 +18,7 @@ class StreakTimer {
     }, this.resolution * 1000);
   }
   private broadcast() {
-    self.dispatchEvent(new CustomEvent('timerchanged', { detail: this.time * this.resolution }))
+    dispatchEvent(new CustomEvent('timerchanged', { detail: this.time * this.resolution }))
   }
   stop() {
     if (this.timer !== null) {

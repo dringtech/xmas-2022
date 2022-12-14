@@ -74,7 +74,7 @@ export function setup(context: P5I) {
       head: assets.bea,
     }, context),
   );
-  self.addEventListener('startGame', () => {
+  addEventListener('startGame', () => {
     loop();
   })
   noLoop();

@@ -59,7 +59,7 @@ export class Delia extends Drawable {
     this.ctx = { width, height };
     if (this.hunting && rangeToTarget(this, this.desired) < 50) {
       this.active = true;
-      self.dispatchEvent(new CustomEvent('turkeySnaffled'));
+      dispatchEvent(new CustomEvent('turkeySnaffled'));
     }
     if (rangeToTarget(this, this.desired) > 100) this.hunting = true;
     const speed = constrain(width / 30, 30, 100);
@@ -80,6 +80,6 @@ export class Delia extends Drawable {
     this.hunting = false;
     this.desired.x = width / 2;
     this.desired.y = height / 2;
-    self.dispatchEvent(new CustomEvent('turkeyDropped'));
+    dispatchEvent(new CustomEvent('turkeyDropped'));
   }
 }

@@ -28,7 +28,7 @@ function setupSound() {
 
 function setupScore() {
   const scoreBox = document.querySelector('#score .time') as Element;
-  self.addEventListener('timerchanged', ({ detail }) => {
+  addEventListener('timerchanged', ({ detail }) => {
     scoreBox.innerHTML = detail.toFixed(2);
   })
   timer.reset();
@@ -37,11 +37,11 @@ function setupScore() {
 function setupPlay() {
   const playButton = document.querySelector('#ready') as HTMLElement;
   const instructions = document.querySelector('#instructions') as HTMLElement;
-  self.addEventListener('startGame', () => {
+  addEventListener('startGame', () => {
     instructions.hidden = true;
   })
   playButton.addEventListener('click', () => {
-    self.dispatchEvent(new CustomEvent('startGame'));
+    dispatchEvent(new CustomEvent('startGame'));
   });
 }
 
