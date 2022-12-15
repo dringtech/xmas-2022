@@ -97,11 +97,19 @@ button {
   color: green;
   text-align: center;
   transition: top 1s ease-in-out;
+  padding: 1rem;
   & h1 {
     font-size: 1.6em;
   }
   & img {
-    width: 20vw;
+    width: 30vw;
+  }
+  & button {
+    color: white;
+    background: #e32620;
+    font-size: 1.2em;
+    border: none;
+    box-shadow: 10px 10px black;
   }
 }
 
